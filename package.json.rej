@@ -1,0 +1,11 @@
+diff a/package.json b/package.json	(rejected hunks)
+@@ -17,7 +17,8 @@
+     "axios": "^0.16.1",
+     "vue": "^2.3.3",
+     "vue-axios": "^2.0.2",
+-    "vue-router": "^2.3.1"
++    "vue-router": "^2.3.1",
++    "vue-awesome-swiper": "2.4.2"
+   },
+   "devDependencies": {
+     "autoprefixer": "^6.7.2",
