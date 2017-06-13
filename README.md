@@ -2,9 +2,9 @@
 
 > A Vue.js project
 
-> 本项目采用的是 vue + webpack + vue-router + axios完成，由于vuex还不是很熟练，在下个练手项目的时候再用上
+ 本项目采用的是 vue + webpack + vue-router + axios完成，由于vuex还不是很熟练，在下个练手项目的时候再用上
 
-> 温馨提示：本项目是基于豆瓣电影api来完成，纯属练手项目，仅供参考
+ 温馨提示：本项目是基于豆瓣电影api来完成，纯属练手项目，仅供参考
 
 ## Build Setup
 
