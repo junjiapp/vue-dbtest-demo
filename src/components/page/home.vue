@@ -4,8 +4,8 @@
       <loading></loading>
     </section>
       <section v-else>
-        <wjj-home :title="title_1" :showData="showData_1" :type="type_1"></wjj-home>
-        <wjj-home :title="title_2" :showData="showData_2" :type="type_2"></wjj-home>
+        <wjj-home :title="in_theaters.title" :showData="in_theaters.showData" :type="in_theaters.type"></wjj-home>
+        <wjj-home :title="coming_soon.title" :showData="coming_soon.showData" :type="coming_soon.type"></wjj-home>
         <div class="type">
           <h2 class="t-title">电影类型</h2>
           <ul>
@@ -21,7 +21,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
+  import { Api } from '@/api/index'
   import loading from '../common/wjjLoading.vue'
   import wjjHome from '../common/wjjHome.vue'
   export default{
@@ -29,14 +29,18 @@
       return{
         city: '广州',
         count: '6',
-        title_1:'',
-        showData_1:'',
-        title_2:'',
-        showData_2:'',
-        type_1:'in_theaters',
-        type_2:'coming_soon',
+        in_theaters: {
+          "type": "",
+          "title": "",
+          "showData": ""
+        },
+        coming_soon: {
+          "type": "",
+          "title": "",
+          "showData": ""
+        },
         loading: 0,
-        logo: require("../../../static/img/logo-blue.png"),
+        logo: require("@/assets/img/logo-blue.png"),
         listType:[
           {tag:'喜剧'},
           {tag:'恐怖'},
@@ -57,35 +61,10 @@
       loading,wjjHome
     },
     mounted:function (){
-      var that = this;
-      axios.get('/api/movie/in_theaters', {
-        params: {
-          city: that.city,
-          count: that.count
-        }
+      this.$nextTick(function () {
+        Api.Fn.home.homeShow(this, 'in_theaters', this.in_theaters);
+        Api.Fn.home.homeShow(this, 'coming_soon', this.coming_soon);
       })
-      .then(function (res) {
-        console.log(res.data);
-        that.title_1 = res.data.title;
-        that.showData_1 = res.data.subjects;
-        that.loading = that.loading += 1;
-      }).catch(function (res) {
-        console.log(res);
-      });
-      axios.get('/api/movie/coming_soon', {
-          params: {
-            city: that.city,
-            count: that.count
-          }
-        })
-        .then(function (res) {
-          console.log(res.data);
-          that.title_2 = res.data.title;
-          that.showData_2 = res.data.subjects;
-          that.loading = that.loading += 1;
-        }).catch(function (res) {
-        console.log(res);
-      });
     },
     methods:{
       showMovie:function (str) {

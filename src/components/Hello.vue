@@ -22,7 +22,7 @@ export default {
       nameState: false,
       goState: true,
       name: "",
-      logo: require("../../static/img/logo-black.png")
+      logo: require("@/assets/img/logo-black.png")
     }
   },
   methods:{

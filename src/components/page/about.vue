@@ -6,7 +6,7 @@
       </div>
       <div class="info">
         <h3>项目说明</h3>
-        <p>温馨提示：本项目是基于豆瓣电影api来完成，纯属新手练手项目，仅供参考</p>
+        <p>温馨提示：本项目是基于豆瓣电影api来完成，纯属练手项目，仅供参考</p>
         <ul>
           <li>页面说明</li>
           <li>about.vue —— 说明页</li>
@@ -39,12 +39,12 @@
     data () {
       return {
         logo:[
-          {logo_name:require("../../../static/img/logo.png")},
-          {logo_name:require("../../../static/img/logo-blue.png")},
-          {logo_name:require("../../../static/img/logo-black.png")}
+          {logo_name:require("@/assets/img/logo.png")},
+          {logo_name:require("@/assets/img/logo-blue.png")},
+          {logo_name:require("@/assets/img/logo-black.png")}
         ],
-        logo_left:require("../../../static/img/logo-left.png"),
-        logo_info:require("../../../static/img/logo-info.png")
+        logo_left:require("@/assets/img/logo-left.png"),
+        logo_info:require("@/assets/img/logo-info.png")
       }
     }
   }

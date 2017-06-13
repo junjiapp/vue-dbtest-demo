@@ -31,7 +31,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
+  import { Api } from '@/api/index'
   import loading from '../common/wjjLoading.vue'
   export default{
     data () {
@@ -101,21 +101,7 @@
     },
     mounted:function () {
       this.$nextTick(function () {
-        const that = this;
-        axios.get('/api/movie/' + this.$route.params.type, {
-            params: {
-              city: that.city,
-              count: that.count,
-              start: (that.page - 1) * that.count
-            }
-          })
-          .then((res) =>{
-            console.log(res.data);
-            that.listData = res.data;
-            that.loading = false;
-          }).catch((res) =>{
-            console.log(res);
-        });
+        Api.Fn.list.getList(this);
       });
     },
     methods: {
@@ -125,25 +111,7 @@
         this.$root.$emit('showMovie', str);
       },
       getMore:function () {
-        const that = this;
-        axios.get('/api/movie/' + this.$route.params.type, {
-            params: {
-              city: that.city,
-              count: that.count,
-              start: that.page * that.count
-            }
-          })
-          .then((res) =>{
-            if(res.data && res.data.subjects.length){
-              that.page ++;
-              that.listData.subjects = that.listData.subjects.concat(res.data.subjects);
-            }else{
-              that.more = false
-            }
-            console.log(res.data);
-          }).catch((res) =>{
-            console.log(res);
-        });
+        Api.Fn.list.getMore(this);
       }
     }
   }

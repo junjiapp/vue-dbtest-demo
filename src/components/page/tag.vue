@@ -33,7 +33,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
+  import { Api } from '@/api/index'
   import loading from '../common/wjjLoading.vue'
   export default{
     data () {
@@ -101,20 +101,7 @@
     },
     mounted:function () {
       this.$nextTick(function () {
-        const that = this;
-        axios.get('/api/movie/search?tag='+ that.$route.params.type,{
-            params:{
-              count: that.count,
-              start: (that.page - 1) * that.count
-            }
-          })
-          .then(res => {
-            that.tagData = res.data;
-            that.loading = false;
-            console.log(res);
-          }).catch(res => {
-          console.log(res);
-        })
+        Api.Fn.home.tagShow(this);
       });
     },
     methods:{
@@ -124,24 +111,7 @@
         this.$root.$emit('showMovie',str);
       },
       getMore:function () {
-        const that = this;
-        axios.get('/api/movie/search?tag='+ that.$route.params.type, {
-            params: {
-              count: that.count,
-              start: that.page * that.count
-            }
-          })
-          .then((res) =>{
-            if(res.data && res.data.subjects.length){
-              that.page ++;
-              that.tagData.subjects = that.tagData.subjects.concat(res.data.subjects);
-            }else{
-              that.more = false
-            }
-            console.log(res.data);
-          }).catch((res) =>{
-          console.log(res);
-        });
+        Api.Fn.home.tagMore(this);
       }
     }
   }

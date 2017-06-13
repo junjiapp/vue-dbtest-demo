@@ -14,7 +14,6 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
   export default {
     data () {
       return {
@@ -37,8 +36,12 @@
     },
     methods: {
       sendSearch:function () {
-        this.$router.push({path: '/result', query: {name:this.txt} });
-        this.txt = "";
+        if(this.txt.length == 0){
+          alert('搜索框不能为空，请输出搜索内容');
+        }else{
+          this.$router.push({path: '/result', query: {name:this.txt} });
+          this.txt = "";
+        }
       },
       showMovie:function (str) {
         const path = '/show/' + str;

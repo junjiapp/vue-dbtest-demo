@@ -33,7 +33,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
+  import { Api } from '@/api/index'
   import loading from '../common/wjjLoading.vue'
   export default{
     data () {
@@ -102,22 +102,7 @@
     },
     mounted:function () {
       this.$nextTick(function () {
-        const that = this;
-        that.s_txt = that.$route.query.name
-        console.log(that.s_txt)
-        axios.get('/api/movie/search?q='+ that.s_txt,{
-          params:{
-            count: that.count,
-            start: (that.page - 1) * that.count
-          }
-        })
-          .then(res => {
-            that.result = res.data;
-            that.loading = false;
-            console.log(res);
-          }).catch(res => {
-          console.log(res);
-        })
+        Api.Fn.search.result(this);
       });
     },
     methods:{
@@ -127,24 +112,7 @@
         this.$root.$emit('showMovie',str);
       },
       getMore:function () {
-        const that = this;
-        axios.get('/api/movie/search?q='+ that.s_txt, {
-            params: {
-              count: that.count,
-              start: that.page * that.count
-            }
-          })
-          .then((res) =>{
-            if(res.data && res.data.subjects.length){
-              that.page ++;
-              that.result.subjects = that.result.subjects.concat(res.data.subjects);
-            }else{
-              that.more = false
-            }
-            console.log(res.data);
-          }).catch((res) =>{
-          console.log(res);
-        });
+        Api.Fn.search.resultMore(this);
       }
     }
   }

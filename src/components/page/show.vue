@@ -42,7 +42,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-  import axios from 'axios'
+  import { Api } from '@/api/index'
   import wjjSwiper from '../common/wjjSwiper.vue'
   import loading from '../common/wjjLoading.vue'
   export default{
@@ -116,17 +116,7 @@
     },
     mounted: function () {
       this.$nextTick(function () {
-        const that = this;
-        const url = '/api/movie/subject/' + this.$route.params.id;
-        axios.get(url)
-          .then(function (res) {
-            that.movieInfo = res.data;
-            that.loading = false;
-             console.log(res.data)
-          })
-          .catch(function (res) {
-            console.log(res)
-          })
+        Api.Fn.show.showInfo(this);
       })
     }
   }
