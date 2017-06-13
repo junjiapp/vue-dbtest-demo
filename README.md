@@ -9,12 +9,15 @@
 ## Build Setup
 
 > 安装依赖包
+
  npm install
 
 > 启动项目 端口为9999
+
  npm run dev
 
->打包文件  /dist
+>打包文件
+
  npm run build
 
 ## introduce
